@@ -8,7 +8,11 @@ public class LzwTree {
 
     public LzwTree(int maxSize){
         currentIndex = 0;
-        this.maxSize = maxSize;
+        this.maxSize = (maxSize > 256) ? maxSize : 256;
+    }
+
+    public LzwTree(){
+        this(10000);
     }
 
     /**
@@ -26,10 +30,12 @@ public class LzwTree {
      * @param symbol
      * @return
      */
-    public int indexSymbol(int symbol){
+    public LzwNode getNodeBySymbol(int symbol){
+        return root.getNodeBySymbol(symbol);
+    }
 
-//        return root.findSymbolIndex(symbol);
-        return 0;
+    public void addSymbol(LzwNode parent, int symbol){
+        parent.addChild(currentIndex++, symbol);
     }
 
 }

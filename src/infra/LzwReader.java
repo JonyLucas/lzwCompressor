@@ -23,7 +23,6 @@ public class LzwReader {
         } catch (IOException e) {
             return -1;
         }
-
     }
 
 }

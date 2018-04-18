@@ -45,14 +45,34 @@ public class LzwNode{
      * @param searchIndex
      * @return
      */
-    public LzwNode getChildByIndex(int searchIndex){
+    public LzwNode getNodeByIndex(int searchIndex){
         if(this.index == searchIndex)
             return this;
         else {
             for (LzwNode node : children){
-                LzwNode indexedChild = node.getChildByIndex(searchIndex);
+                LzwNode indexedChild = node.getNodeByIndex(searchIndex);
                 if(indexedChild != null)
                     return indexedChild;
+            }
+
+            return null;
+        }
+    }
+
+    /**
+     * Realiza a busca do nó pelo símbolo, retornando o nó correspondente, caso exista
+     *
+     * @param searchSymbol
+     * @return
+     */
+    public LzwNode getNodeBySymbol(int searchSymbol){
+        if(this.symbol == searchSymbol)
+            return this;
+        else {
+            for (LzwNode node : children){
+                LzwNode symbolNode = node.getNodeBySymbol(searchSymbol);
+                if(symbolNode != null)
+                    return symbolNode;
             }
 
             return null;

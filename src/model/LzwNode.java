@@ -17,6 +17,8 @@ public class LzwNode{
 
     public int getIndex(){ return index; }
 
+    public ArrayList<LzwNode> getChildren() { return children; }
+
     /**
      * Realiza a busca do índice do símbolo passado como argumento, retornando o seu índice, caso exista,
      * caso contrário, retorna -1.
@@ -83,7 +85,14 @@ public class LzwNode{
         children.add(new LzwNode(index, symbol));
     }
 
-    public void showChildren() {
+    public String getDescription() {
+
+        String description = "Parent: Index[" + this.index + "] Symbol[" + this.symbol + "]\n";
+        for (LzwNode node : children){
+            description += "\tChild: Index[" + node.getIndex() + "] Symbol[" + node.getSymbol() + "]\n";
+        }
+
+        return description;
 
     }
 }

@@ -38,8 +38,10 @@ public class LzwCompressor {
         while (currentSymbol != -1){
             if(searchAndAddSymbol(currentSymbol)){
                 currentSymbol = reader.readByte();
+                if (currentSymbol == -1)
+                    code += currentNode.getIndex() + " "; //Adiciona o índice do ultimo símbolo lido
             } else {
-                code += currentNode.getIndex();
+                code += currentNode.getIndex() + " ";
                 currentNode = null;
             }
         }
@@ -63,12 +65,15 @@ public class LzwCompressor {
 
         if(currentNode == null) {
             currentNode = dictionary.getNodeBySymbol(symbol);
+            System.out.println(currentNode.getDescription());
             return true;
         } else if(currentNode.findSymbolIndex(symbol) != -1){
             currentNode = currentNode.getNodeBySymbol(symbol);
+            System.out.println(currentNode.getDescription());
             return true;
         } else {
             dictionary.addSymbol(currentNode, symbol);
+            System.out.println(currentNode.getDescription());
             return false;
         }
 

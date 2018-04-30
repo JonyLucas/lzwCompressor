@@ -1,27 +1,44 @@
 package infra;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.BufferedReader; //Provisorio
-import java.io.IOException;
+import java.io.*;
 
 public class LzwReader {
 
-    private BufferedReader reader;
+    private DataInputStream reader;
 
-    public LzwReader(String path) throws Exception {
+    public LzwReader(String filePath) throws Exception {
         try {
-            reader = new BufferedReader(new FileReader(path));
+            reader = new DataInputStream(new FileInputStream(filePath));
         } catch (FileNotFoundException e) {
             throw new Exception("Arquivo não encontrado");
         }
     }
 
-    public int readByte(){
+    public int nextByte()
+    {
+        int b = -1;
         try {
-            return reader.read();
+            b = reader.readUnsignedByte();
+            //System.out.println("Byte: " + b);
+        } catch (EOFException eof){
+            close();
+            b = -1;
+        }
+        catch (IOException e) {
+            close();
+            e.printStackTrace();
+        }
+
+        //System.out.println("Byte: " + b);
+        return b;
+    }
+
+    private void close()
+    {
+        try {
+            reader.close();
         } catch (IOException e) {
-            return -1;
+            e.printStackTrace();
         }
     }
 

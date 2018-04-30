@@ -6,6 +6,8 @@ public class LzwTree {
     private int maxSize;
     private LzwNode root;
 
+
+
     public LzwTree(int maxSize){
         currentIndex = 0;
         this.maxSize = (maxSize > 256) ? maxSize : 256;
@@ -38,10 +40,11 @@ public class LzwTree {
                 return node;
         }
 
-        return root.getNodeBySymbol(symbol); //Busca em profundidade
+        return null; //Busca em profundidade
     }
 
     public void addSymbol(LzwNode parent, int symbol){
+        if(maxSize <= currentIndex) return;
         parent.addChild(currentIndex++, symbol);
     }
 
@@ -49,4 +52,11 @@ public class LzwTree {
 
     }
 
+    public int getSize() {
+        return currentIndex;
+    }
+
+    public int getMaxSize() {
+        return maxSize;
+    }
 }

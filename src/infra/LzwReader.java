@@ -19,7 +19,6 @@ public class LzwReader {
         int b = -1;
         try {
             b = reader.readUnsignedByte();
-            //System.out.println("Byte: " + b);
         } catch (EOFException eof){
             close();
             b = -1;
@@ -29,7 +28,6 @@ public class LzwReader {
             e.printStackTrace();
         }
 
-        //System.out.println("Byte: " + b);
         return b;
     }
 

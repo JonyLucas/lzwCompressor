@@ -36,11 +36,11 @@ public class LzwTree {
      */
     public LzwNode getNodeBySymbol(int symbol){
         for (LzwNode node : root.getChildren()){
-            if(node.getSymbol() == symbol) //Busca em largura
+            if(node.getSymbol() == symbol)
                 return node;
         }
 
-        return null; //Busca em profundidade
+        return null;
     }
 
     public void addSymbol(LzwNode parent, int symbol){

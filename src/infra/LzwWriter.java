@@ -38,7 +38,6 @@ public class LzwWriter
     public void write(int index, int nBits)
     {
 
-        //System.out.println("NB: " + nBits + " index: " + index);
         for(int i = nBits-1; i >= 0; i--)
         {
             bufferWriter[indexBuffer--] = getBit(index, i);

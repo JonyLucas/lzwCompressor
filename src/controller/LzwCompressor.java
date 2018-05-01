@@ -44,15 +44,11 @@ public class LzwCompressor {
 
         int currentSymbol = reader.nextByte();
         while (currentSymbol != -1){
-            System.out.println("sSymbolo atual: " + currentSymbol);
             if(searchAndAddSymbol(currentSymbol)){
                 currentSymbol = reader.nextByte();
                 if (currentSymbol == -1)
-                    //code += currentNode.getIndex() + " "; //Adiciona o índice do ultimo símbolo lido
-                    //System.out.println("Entrando no ultimo: " + currentNode.getIndex());
                     writer.writeLastChar(currentNode.getIndex(), nBits);
             } else {
-                //code += currentNode.getIndex() + " ";
                 writer.write(currentNode.getIndex(), nBits);
                 if(Math.pow(2, nBits) <= dictionary.getSize()) nBits++;
                 currentNode = null;
@@ -78,16 +74,15 @@ public class LzwCompressor {
 
         if(currentNode == null) {
             currentNode = dictionary.getNodeBySymbol(symbol);
-            System.out.println(currentNode.getDescription());
+            //System.out.println(currentNode.getDescription());
             return true;
         } else if(currentNode.findSymbolIndex(symbol) != -1){
             currentNode = currentNode.getNodeBySymbol(symbol);
-            System.out.println(currentNode.getDescription());
+            //System.out.println(currentNode.getDescription());
             return true;
         } else {
-            System.out.println("sSymbolo add: " + symbol);
             dictionary.addSymbol(currentNode, symbol);
-            System.out.println(currentNode.getDescription());
+            //System.out.println(currentNode.getDescription());
             return false;
         }
 
